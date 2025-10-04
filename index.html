@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EventEye - Home</title>
+  <style>
+    /* Global Styles for Navigation Consistency */
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+    :root {
+      --primary-color: #0ee6e2;
+    }
+
+    /* ===== Navbar CSS ===== */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      background: transparent;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 10;
+      box-sizing: border-box;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #ddd;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .signin-btn {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 20px;
+      /* Link to the login page */
+      text-decoration: none; 
+      display: inline-block;
+    }
+    
+    /* ===== Landing Page Layout & Eye CSS ===== */
+    #landing-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .eye-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40%;
+      height: 100%;
+      background: radial-gradient(circle at center, #222, #000);
+    }
+
+    .eye {
+      width: 120px;
+      height: 120px;
+      background: #fff;
+      border-radius: 30%;
+      margin: 0 20px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: inset -10px -10px 20px rgba(0,0,0,0.4);
+    }
+
+    .pupil {
+      width: 50px;
+      height: 50px;
+      background: black;
+      border-radius: 50%;
+      position: absolute;
+      transition: transform 0.05s linear;
+    }
+
+    .content {
+      width: 60%;
+      padding: 100px 40px 40px 40px; 
+      color: #fff;
+    }
+
+    .highlight {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      line-height: 1.2;
+    }
+
+    .btn {
+      margin-top: 20px;
+      background: var(--primary-color);
+      color: #030303;
+      padding: 12px 25px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      text-decoration: none; /* For the Explore button/link */
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: #0ac1d1;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">👁️ EventEye</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#">Explore</a>
+      <a href="#">Guide</a>
+      <a href="#">Contacts</a>
+      <a href="#">FAQs</a>
+    </div>
+    <a href="login.html" class="signin-btn">Sign In</a>
+  </nav>
+
+  <div id="landing-content">
+    <div class="eye-container">
+      <div class="eye">
+        <div class="pupil"></div>
+      </div>
+      <div class="eye">
+        <div class="pupil"></div>
+      </div>
+    </div>
+
+    <div class="content">
+      <h1>Create. Personalize. Deliver — All in One Go —  <span class="highlight">Unforgettable</span> Experiences!</h1>
+      <p>Bulk certificate generation powered by <span class="highlight">automation</span> — customizable, trackable, and ready to share <span class="highlight">instantly</span></p>
+      <a href="login.html" class="btn">Explore Now</a>
+    </div>
+  </div>
+
+  <script>
+    const pupils = document.querySelectorAll('.pupil');
+    const eyes = document.querySelectorAll('.eye');
+
+    document.addEventListener('mousemove', (e) => {
+      eyes.forEach((eye, index) => {
+        const rect = eye.getBoundingClientRect();
+        const eyeCenterX = rect.left + rect.width / 2;
+        const eyeCenterY = rect.top + rect.height / 2;
+
+        const angle = Math.atan2(e.pageY - eyeCenterY, e.pageX - eyeCenterX);
+        const pupil = pupils[index];
+
+        const maxMovement = 30; 
+        const x = Math.cos(angle) * maxMovement;
+        const y = Math.sin(angle) * maxMovement;
+
+        pupil.style.transform = `translate(${x}px, ${y}px)`;
+      });
+    });
+  </script>
+</body>
+</html>
